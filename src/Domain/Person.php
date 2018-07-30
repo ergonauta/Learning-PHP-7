@@ -2,16 +2,17 @@
 
     namespace Bookstore\Domain;
 
-    class Person {
+    use Bookstore\Utils\Unique;
 
-        private static $lastID = 0;
-        protected $id;
+    class Person {
+        use Unique;
+
         protected $firstName;
         protected $surname;
         protected $email;
 
         public function __construct(
-            int $id,
+            ?int $id,
             string $firstName,
             string $surname,
             string $email
@@ -20,16 +21,6 @@
             $this->surname = $surname;
             $this->email = $email;
             $this->setID($id);
-        }
-
-        private function setID($id) {
-            if($id == null)
-                $this->id = ++self::$lastID;
-            else {
-                $this->id = $id;
-                if ($id > self::$lastID)
-                    self::$lastID = $id;
-            }
         }
 
         public function getFirstName() : string {
@@ -46,10 +37,6 @@
 
         public function setEmailTo($email) {
             $this->email = $email;
-        }
-
-        public function getLastID(): int {
-            return self::$lastID;
         }
 
         public function printData() : string {

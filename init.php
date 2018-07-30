@@ -1,8 +1,7 @@
 <?php
 
-    //Implementing autoloading
-    use Bookstore\Domain\Book;
-    use Bookstore\Domain\Customer\Basic;
+    use Bookstore\Domain\Customer\CustomerFactory;
+    use Bookstore\Utils\Config;
 
     function autoloader($className) {
         $lastSlash = strpos($className, '\\') + 1;
@@ -14,34 +13,16 @@
 
     spl_autoload_register('autoloader');
 
-    $book1 = new Book("1984", "George Orwell", 9785267006323, 12);
+    // Design patterns
 
-    $book1->printData();
+    // Factory
+    $factory1 = CustomerFactory::factory('basic', 2, 'mary', 'poppins', 'marypoppins@gmail.com');
+    $factory2 = CustomerFactory::factory('premium', null, 'james', 'bond', 'james@gmail.com');
 
-    // Overriding methods
-    class Pops {
-        public function sayHi() {
-            echo "Hi, I am pops. <br>";
-        }
-    }
+    echo $factory1->getType() . '<br>';
+    echo $factory2->getType() . '<br>';
 
-    class Child extends Pops {
-        public function sayHi() {
-            echo "Hi, I am a child <br>";
-            parent::sayHi();
-        }
-    }
-
-    $pops = new Pops();
-    $child = new Child();
-    $pops->sayHi();
-    $child->sayHi();
-
-    // Inheritance
-    $customer1 = new Basic(5, 'John', 'Doe', 'johndoe@gmail.com');
-    var_dump(checkIfValid($customer1, [$book1]));
-
-    function checkIfValid(Basic $customer, array $books): bool {
-            return $customer->getAmountToBorrow() >= count($books);
-    }
-
+    // Singleton
+    $config = Config::getInstance();
+    $dbConfig = $config->get('db');
+    var_dump($dbConfig);
