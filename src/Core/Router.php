@@ -27,13 +27,13 @@
             }
 
             $errorController = new ErrorController($request);
-            return $errorController->notFount();
+            return $errorController->notFound();
         }
 
         private function getRegexRoute(string $route, array $info): string {
             if(isset($info['params']))
                 foreach($info['params'] as $name => $type)
-                    $route = str_replace(':' . $name, self::$refexPatters[$type], $route);
+                    $route = str_replace(':' . $name, self::$regexPatters[$type], $route);
             return $route;
         }
 

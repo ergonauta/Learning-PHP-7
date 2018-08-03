@@ -1,6 +1,6 @@
 <?php
 
-    namespace Bookstore\Utils;
+    namespace Bookstore\Core;
 
     use Bookstore\Exceptions\NotFoundException;
 
