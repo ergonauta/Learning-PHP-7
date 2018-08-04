@@ -29,4 +29,8 @@
             $value = (string) $this->get($name);
             return $filter ? addslashes($value) : $value;
         }
+
+        public function isEmpty(string $name): bool {
+            return strlen($this->map[$name]) === 0;
+        }
     }

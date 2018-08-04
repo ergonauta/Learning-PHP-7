@@ -13,7 +13,7 @@
         ];
 
         public function __construct() {
-            $json = file_get_contents(__DIR__ . '/../../config/router.json');
+            $json = file_get_contents(__DIR__ . '/../../config/routes.json');
             $this->routeMap = json_decode($json, true);
         }
 

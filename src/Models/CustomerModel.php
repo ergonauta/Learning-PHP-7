@@ -33,7 +33,7 @@ SQL;
             SELECT * FROM customer WHERE email = :email
 SQL;
             $stmt = $this->db->prepare($query);
-            $stmt->execute(['user' => $email]);
+            $stmt->execute(['email' => $email]);
 
             $row = $stmt->fetch();
 
