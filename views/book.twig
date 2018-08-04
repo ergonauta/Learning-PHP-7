@@ -1,36 +1,30 @@
 {% extends 'layout.twig' %}
 
 {% block title %}
-    {{ book.title }}
+    Books
 {% endblock %}
 
 {% block content %}
-    <h2>{{ book.title }}</h2>
-    <h3>{{ book.author }}</h3>
+    <table>
+        <thead>
+        <th>Title</th>
+        <th>Author</th>
+        <th></th>
+        </thead>
+    </table>
+    
+    {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td><a href="/book/{{ book.id }}">View</a></td>
+        </tr>
+    {% endfor %}
 
-    <hr>
-
-    <p>
-        <strong>ISBN</strong> {{ book.isbn }}
-    </p>
-
-    <p>
-        <stong>Stock</stong> {{ book.stock }}
-    </p>
-
-    <p>
-        <strong>Price</strong> {{ book.price|number_format(2) }}
-    </p>
-
-    <hr>
-
-    <h3>Actions</h3>
-
-    <form method="post" action="/book/{{ book.id }}/borrow">
-        <input type="submit" value="Borrow">
-    </form>
-
-    <form method="post" action="/book/{{ book.id }}/buy">
-        <input type="submit" value="Buy">
-    </form>
+    {% if currentPage != 1 %}
+        <a href="/books/{{ currentPage - 1 }}">Previous</a>
+    {% endif %}
+    {% if not lastPage %}
+        <a href="/books/{{ currentPage + 1 }}">Next</a>
+    {% endif %}
 {%  endblock %}
