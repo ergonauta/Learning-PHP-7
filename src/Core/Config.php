@@ -7,7 +7,7 @@
     class Config {
         private $data;
 
-        private function __construct() {
+        public function __construct() {
             $json = file_get_contents(__DIR__ . '/../../config/app.json');
             $this->data = json_decode($json, true);
         }
