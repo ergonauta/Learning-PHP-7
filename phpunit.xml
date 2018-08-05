@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <phpunit    backupGlobals="false"
-            backupStaticAttribute="false"
+            backupStaticAttributes="false"
             colors="true"
             convertErrorsToExceptions="true"
             convertNoticesToExceptions="true"
             convertWarningsToExceptions="true"
             processIsolation="false"
-            stopOnFailture="false"
-            syntaxCheck="false"
+            stopOnFailure="false"
             bootstrap="vendor/autoload.php"
 >
     <testsuites>
