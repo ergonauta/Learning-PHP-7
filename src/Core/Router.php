@@ -4,15 +4,19 @@
 
     use Bookstore\Controllers\ErrorController;
     use Bookstore\Controllers\CustomerController;
+    use Bookstore\Utils\DependencyInjector;
 
     class Router {
+        private $di;
         private $routeMap;
         private static $regexPatters = [
             'number' => '\d+',
             'string' => '\w'
         ];
 
-        public function __construct() {
+        public function __construct(DependencyInjector $di) {
+            $this->di = $di;
+
             $json = file_get_contents(__DIR__ . '/../../config/routes.json');
             $this->routeMap = json_decode($json, true);
         }
@@ -26,7 +30,7 @@
                     return $this->executeController($route, $path, $info, $request);
             }
 
-            $errorController = new ErrorController($request);
+            $errorController = new ErrorController($this->di, $request);
             return $errorController->notFound();
         }
 
@@ -39,14 +43,14 @@
 
         private function executeController(string $route, string $path, array $info, Request $request): string {
             $controllerName = '\Bookstore\Controllers\\' . $info['controller'] . 'Controller';
-            $controller = new $controllerName($request);
+            $controller = new $controllerName($this->di, $request);
 
             if (isset($info['login']) && $info['login']) {
                 if ($request->getCookies()->has('user')) {
                     $customerId = $request->getCookies()->get('user');
                     $controller->setCustomerId($customerId);
                 } else {
-                    $errorController = new CustomerController;
+                    $errorController = new CustomerController($this->di, $request);
                     return $errorController->login();
                 }
             }

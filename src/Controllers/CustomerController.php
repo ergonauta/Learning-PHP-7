@@ -30,7 +30,7 @@
 
             setcookie('user', $customer->getType());
 
-            $newController = new BookController($this->request);
+            $newController = new BookController($this->di, $this->request);
             return $newController->getAll();
         }
     }
