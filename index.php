@@ -1,11 +1,12 @@
 <?php
 
+    use Monolog\Logger;
+    use Monolog\Handler\StreamHandler;
     use Bookstore\Core\Router;
     use Bookstore\Core\Request;
     use Bookstore\Core\Config;
     use Bookstore\Utils\DependencyInjector;
-    use Monolog\Logger;
-    use Monolog\Handler\StreamHandler;
+    use Bookstore\Models\BookModel;
 
     require_once __DIR__ . '/vendor/autoload.php';
 
@@ -30,7 +31,8 @@
     $di->set('Utils\Config', $config);
     $di->set('Twig_Environment', $view);
     $di->set('Logger', $log);
+    $di->set('BookModel', new BookModel($di->get('PDO')));
 
-    $router = new Router();
+    $router = new Router($di);
     $response = $router->route(new Request());
     echo $response;
