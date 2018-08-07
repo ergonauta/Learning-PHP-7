@@ -43,11 +43,12 @@
         }
 
         public function getByUser(): string {
-            $bookModel = new BookModel($this->db);
+//            $bookModel = new BookModel($this->db);
+            $bookModel = $this->di->get('BookModel');
 
             $books = $bookModel->getByUser($this->customerId);
             $properties = [
-                'book' => $books,
+                'books' => $books,
                 'currentPage' => 1,
                 'lastPage' => true
             ];
@@ -89,7 +90,7 @@
                 $bookModel->borrow($book, $this->customerId);
             } catch (DbException $e) {
                 $this->log->error('Error borrowing book: ' . $e->getMessage());
-                $params = ['errorMessage' => 'Error borrowing book'];
+                $params = ['errorMessage' => 'Error borrowing book.'];
                 return $this->render('error.twig', $params);
             }
 

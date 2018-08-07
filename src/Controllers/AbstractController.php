@@ -3,7 +3,6 @@
     namespace Bookstore\Controllers;
 
     use Bookstore\Core\Config;
-    use Bookstore\Core\Db;
     use Bookstore\Core\Request;
     use Bookstore\Utils\DependencyInjector;
     use Monolog\Logger;
@@ -20,15 +19,15 @@
         protected $log;
 
         public function __construct(DependencyInjector $di, Request $request) {
-            $this->request = $request;
             $this->di = $di;
+            $this->request = $request;
 
             $this->db = $di->get('PDO');
             $this->log = $di->get('Logger');
             $this->view = $di->get('Twig_Environment');
             $this->config = $di->get('Utils\Config');
 
-            $this->customerId = $_COOKIE['id'];
+            $this->customerId = $_COOKIE['id'] ?? null;
         }
 
         public function setCustomerId(int $customerId) {

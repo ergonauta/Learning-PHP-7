@@ -42,8 +42,8 @@ SQL;
         public function getByUser(int $userId): array {
             $query = <<<'SQL'
             SELECT b.*
-FROM borrowed_books bb LEFT JOIN book b ON bb.book_id = b.id
-WHERE bb.customer_id = :id
+            FROM borrowed_books bb LEFT JOIN book b ON bb.book_id = b.id
+            WHERE bb.customer_id = :id
 SQL;
             $stmt = $this->db->prepare($query);
             $stmt->execute(['id' => $userId]);
@@ -72,7 +72,6 @@ SQL;
             $stmt = $this->db->prepare($query);
             $stmt->bindValue('bookId', $book->getId());
             $stmt->bindValue('user', $userId);
-
             if (!$stmt->execute())
                 throw new DbException($stmt->errorInfo()[2]);
 

@@ -19,6 +19,10 @@
             return 'Basic';
         }
 
+        public function getId(): int {
+            return $this->id;
+        }
+
         public function pay(float $amount) {
             echo "Paying $amount.";
         }

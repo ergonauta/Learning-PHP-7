@@ -28,7 +28,7 @@
                 return $this->render('login.twig', $params);
             }
 
-            setcookie('user', $customer->getType());
+            setcookie('user', $customer->getId());
 
             $newController = new BookController($this->di, $this->request);
             return $newController->getAll();

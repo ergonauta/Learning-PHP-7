@@ -20,7 +20,7 @@
             $this->firstName = $firstName;
             $this->surname = $surname;
             $this->email = $email;
-            $this->setID($id);
+            $this->setId($id);
         }
 
         public function getFirstName() : string {
@@ -38,11 +38,4 @@
         public function setEmailTo($email) {
             $this->email = $email;
         }
-
-        public function printData() : string {
-            return  'First name: '  . $this->firstName .
-                ' - Surname: '   . $this->surname .
-                ' - Email: '     . $this->email;
-        }
-
     }

@@ -54,8 +54,8 @@
     // Traits
     $basic1 = new Basic(1, "name", "surname", "email");
     $basic2 = new Basic((int)null, "name", "surname", "email");
-    var_dump($basic1->getID());
-    var_dump($basic2->getID());
+    var_dump($basic1->getId());
+    var_dump($basic2->getId());
 
     $basic = new Basic(1, "name", "surname", "email");
     $premium = new Premium((int)null, "name", "surname", "email");

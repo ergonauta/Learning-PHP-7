@@ -53,7 +53,7 @@
         }
 
         public function isAvailable(): bool {
-            return $this->stock > 1;
+            return $this->stock > 0;
         }
 
     }
